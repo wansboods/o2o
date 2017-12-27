@@ -4,15 +4,18 @@ SET FOREIGN_KEY_CHECKS=0;
 -- Table structure for `t_area`
 -- ----------------------------
 
-DROP TABLE IF EXISTS `t_user`;
-CREATE TABLE `t_user` (
-  `area_id` int(2) NOT NULL auto_increment,
-  `area_name` varchar(200) default NULL COMMENT '区域名称',
-  `priority` int(2) NOT NULL DEFAULT '0' COMMENT '权重',
-  `create_time` DATETIME default NULL COMMENT '创建时间',
+DROP TABLE IF EXISTS `t_local_auth_info`;
+CREATE TABLE `t_local_auth_info` (
+  `local_auth_id` int(10) NOT NULL auto_increment,
+  `user_id` int(10) NOT NULL COMMENT '用户表ID',
+  `username` varchar(128) NOT NULL COMMENT '用户名',
+  `password` varchar(32) DEFAULT NULL COMMENT '密码',
+  `create_time` DATETIME default NULL default '0' COMMENT '创建时间',
   `last_edit_time` DATETIME default NULL COMMENT '最后编辑时间',
-  PRIMARY KEY  (`area_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='区域表';
+  PRIMARY KEY  (`local_auth_id`),
+  UNIQUE KEY `uk_local_profile`( `username` ),
+  CONSTRAINT `fk_localauth` FOREIGN KEY (`user_id`) REFERENCES `t_person_info`(`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='本地表';
 
 -- ----------------------------
 -- Records of t_user
