@@ -4,17 +4,18 @@ SET FOREIGN_KEY_CHECKS=0;
 -- Table structure for `t_area`
 -- ----------------------------
 
-DROP TABLE IF EXISTS `t_wechat_auth_info`;
-CREATE TABLE `t_wechat_auth_info` (
-  `wechat_auth_id` int(10) NOT NULL auto_increment,
-  `user_id` int(10) NOT NULL COMMENT '用户表ID',
-  `open_id` varchar(1024) NOT NULL COMMENT '微信号',
-  `create_time` DATETIME default NULL default '0' COMMENT '创建时间',
+DROP TABLE IF EXISTS `t_head_line`;
+CREATE TABLE `t_head_line` (
+  `line_id` int(2) NOT NULL auto_increment,
+  `line_name` varchar(1000) default NULL COMMENT '头条名称',
+  `line_link` VARCHAR(2000) NOT NULL DEFAULT '0' COMMENT '头条链接',
+  `line_img` VARCHAR(2000) NOT NULL DEFAULT '0' COMMENT '头条图片',
+  `prority` INT(2) DEFAULT NULL  DEFAULT '0'  COMMENT '权重',
+  `enable_status` INT(2) DEFAULT NULL  DEFAULT '0'  COMMENT '是否有效',
+  `create_time` DATETIME default NULL COMMENT '创建时间',
   `last_edit_time` DATETIME default NULL COMMENT '最后编辑时间',
-  PRIMARY KEY  (`wechat_auth_id`),
-  UNIQUE KEY `uk_wechat_profile`( `open_id` ),
-  CONSTRAINT `fk_wechatauth` FOREIGN KEY (`user_id`) REFERENCES `t_person_info`(`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='本地表';
+  PRIMARY KEY  (`line_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='头条表';
 
 -- ----------------------------
 -- Records of t_user
