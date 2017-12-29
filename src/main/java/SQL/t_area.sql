@@ -4,8 +4,8 @@ SET FOREIGN_KEY_CHECKS=0;
 -- Table structure for `t_area`
 -- ----------------------------
 
-DROP TABLE IF EXISTS `t_user`;
-CREATE TABLE `t_user` (
+DROP TABLE IF EXISTS `t_area`;
+CREATE TABLE `t_area` (
   `area_id` int(2) NOT NULL auto_increment,
   `area_name` varchar(200) default NULL COMMENT '区域名称',
   `priority` int(2) NOT NULL DEFAULT '0' COMMENT '权重',

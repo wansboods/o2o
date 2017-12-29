@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class AreaDaoTest extends BaseTest{
+public class AreaDaoTest extends BaseTest {
     @Autowired
     private AreaDao areaDao;
 

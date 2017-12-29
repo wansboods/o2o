@@ -47,4 +47,7 @@
         <!-- 给出需要扫描Dao接口包 -->
         <property name="basePackage" value="cn.wansboods.o2o.dao" />
     </bean>
+
+    <!--&lt;!&ndash; 4.扫描web相关的bean &ndash;&gt;-->
+    <!--<context:component-scan base-package="cn.wansboods.o2o.dao" />-->
 </beans>
