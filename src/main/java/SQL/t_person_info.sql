@@ -5,7 +5,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 
 DROP TABLE IF EXISTS `t_person_info`;
-CREATE TABLE `t_user` (
+CREATE TABLE `t_person_info` (
   `user_id` int(10) NOT NULL auto_increment,
   `name` varchar(32) default NULL COMMENT '名称',
   `profile_img` varchar(1024) DEFAULT NULL COMMENT '头像',
@@ -13,7 +13,7 @@ CREATE TABLE `t_user` (
   `gender` varchar(2) DEFAULT NULL COMMENT '性别',
   `enable_status` int(2) NOT NULL DEFAULT '0' COMMENT '是否有效, 0 禁止使用本商城',
   `user_type` int(2) NOT NULL DEFAULT '1' COMMENT '1.顾客 2.店家 3.超级管理员',
-  `create_time` DATETIME default NULL default '0' COMMENT '创建时间',
+  `create_time` DATETIME default NULL  COMMENT '创建时间',
   `last_edit_time` DATETIME default NULL COMMENT '最后编辑时间',
   PRIMARY KEY  (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='人物表';

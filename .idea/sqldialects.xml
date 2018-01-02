@@ -3,6 +3,8 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/java/SQL/t_area.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/SQL/t_local_auth.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/SQL/t_person_info.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/SQL/t_shop.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/SQL/t_wechat_auth.sql" dialect="MySQL" />
   </component>
 </project>

@@ -1,7 +1,7 @@
 package cn.wansboods.o2o.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 public class Shop implements Serializable {
     private Long shopId;
@@ -18,7 +18,7 @@ public class Shop implements Serializable {
     private Area area;
     private PersonInfo owner;
     private ShopCategory shopCategory;
-    private Date creatTime;
+    private Date createTime;
     private Date lastEditTime;
 
     public Long getShopId() {
@@ -118,11 +118,11 @@ public class Shop implements Serializable {
     }
 
     public Date getCreatTime() {
-        return creatTime;
+        return createTime;
     }
 
-    public void setCreatTime(Date creatTime) {
-        this.creatTime = creatTime;
+    public void setCreatTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Date getLastEditTime() {
