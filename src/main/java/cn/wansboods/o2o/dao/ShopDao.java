@@ -8,5 +8,11 @@ public interface ShopDao {
      * @param shop
      * @return
      */
-    int insertShop( Shop shop);
+    int insertShop(Shop shop);
+
+    /**
+     *  更新店铺信息
+     */
+
+    int updateShop(Shop shop);
 }
