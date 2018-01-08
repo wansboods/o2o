@@ -5,6 +5,7 @@ import cn.wansboods.o2o.model.Area;
 import cn.wansboods.o2o.model.PersonInfo;
 import cn.wansboods.o2o.model.Shop;
 import cn.wansboods.o2o.model.ShopCategory;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Date;
@@ -16,6 +17,7 @@ public class ShopDaoTest extends BaseTest{
     @Autowired
     private ShopDao shopDao;
     @Test
+    @Ignore
     public void testInsertShop() {
         Shop shop = new Shop();
         PersonInfo owener = new PersonInfo();
@@ -37,6 +39,17 @@ public class ShopDaoTest extends BaseTest{
         shop.setAdvice( "审核中");
 
         int effectedNum = shopDao.insertShop( shop );
+        assertEquals( 1, effectedNum );
+    }
+
+    @Test
+    public void testupdateShop() {
+        Shop shop = new Shop();
+        shop.setShopId( 2L );
+        shop.setShopName("测试的店铺2");
+        shop.setShopDesc("测试描述2");
+        shop.setLastEditTime( new Date());
+        int effectedNum = shopDao.updateShop( shop );
         assertEquals( 1, effectedNum );
     }
 }
