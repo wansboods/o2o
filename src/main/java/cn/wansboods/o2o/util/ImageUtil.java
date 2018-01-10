@@ -52,6 +52,19 @@ public class ImageUtil {
         return originalFileName.substring( originalFileName.lastIndexOf("."));
     }
 
+
+
+    /**
+     *
+     * @return
+     */
+    public static String getRandomFileName() {
+        //获取随机的五位数
+        int rannum = r.nextInt(89999 ) + 10000;
+        String nowTimeStr = sDateFormat.format( new Date() );
+        return nowTimeStr + rannum;
+    }
+
     public static void main(String[] args) {
         Logger ptr = LoggerFactory.getLogger( ImageUtil.class );
         String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
@@ -67,17 +80,4 @@ public class ImageUtil {
             e.printStackTrace();
         }
     }
-
-    /**
-     *
-     * @return
-     */
-    public static String getRandomFileName() {
-        //获取随机的五位数
-        int rannum = r.nextInt(89999 ) + 10000;
-        String nowTimeStr = sDateFormat.format( new Date() );
-        return nowTimeStr + rannum;
-    }
-
-    
 }
