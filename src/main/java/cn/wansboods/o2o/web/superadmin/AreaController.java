@@ -45,7 +45,4 @@ public class AreaController extends BaseController<AreaService> {
         logger.info( "=== 结束运行{} ===", "测试数据" );
         return modelMap;
     }
-
-
-
 }
