@@ -1,6 +1,6 @@
 package cn.wansboods.o2o.dto;
 
-import cn.wansboods.o2o.model.Shop;
+import cn.wansboods.o2o.entity.Shop;
 import cn.wansboods.o2o.enums.ShopStateEmum;
 import java.util.List;
 

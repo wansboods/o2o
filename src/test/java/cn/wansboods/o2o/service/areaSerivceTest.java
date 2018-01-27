@@ -1,7 +1,7 @@
 package cn.wansboods.o2o.service;
 
 import cn.wansboods.o2o.BaseTest;
-import cn.wansboods.o2o.model.Area;
+import cn.wansboods.o2o.entity.Area;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -5,7 +5,7 @@ import cn.wansboods.o2o.dao.ShopDao;
 import cn.wansboods.o2o.dto.ShopExecution;
 import cn.wansboods.o2o.enums.ShopStateEmum;
 import cn.wansboods.o2o.exceptions.ShopOperationException;
-import cn.wansboods.o2o.model.Shop;
+import cn.wansboods.o2o.entity.Shop;
 import cn.wansboods.o2o.service.ShopService;
 import cn.wansboods.o2o.util.ImageUtil;
 import cn.wansboods.o2o.util.PathUtil;
@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.util.Date;
-import java.io.File;
 
 public class ShopServiceImpl extends BaseService<ShopDao> implements ShopService  {
     @Transactional

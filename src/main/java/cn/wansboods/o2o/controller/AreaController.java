@@ -1,7 +1,7 @@
 package cn.wansboods.o2o.controller;
 
 import cn.wansboods.o2o.base.BaseController;
-import cn.wansboods.o2o.model.Area;
+import cn.wansboods.o2o.entity.Area;
 import cn.wansboods.o2o.service.AreaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

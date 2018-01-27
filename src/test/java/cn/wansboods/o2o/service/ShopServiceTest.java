@@ -1,16 +1,14 @@
 package cn.wansboods.o2o.service;
 
 import cn.wansboods.o2o.BaseTest;
-import cn.wansboods.o2o.dto.ShopExecution;
 import cn.wansboods.o2o.enums.ShopStateEmum;
-import cn.wansboods.o2o.model.Area;
-import cn.wansboods.o2o.model.PersonInfo;
-import cn.wansboods.o2o.model.Shop;
-import cn.wansboods.o2o.model.ShopCategory;
+import cn.wansboods.o2o.entity.Area;
+import cn.wansboods.o2o.entity.PersonInfo;
+import cn.wansboods.o2o.entity.Shop;
+import cn.wansboods.o2o.entity.ShopCategory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.util.Date;
 

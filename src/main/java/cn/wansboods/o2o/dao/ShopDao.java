@@ -1,6 +1,6 @@
 package cn.wansboods.o2o.dao;
 
-import cn.wansboods.o2o.model.Shop;
+import cn.wansboods.o2o.entity.Shop;
 
 public interface ShopDao {
     /**

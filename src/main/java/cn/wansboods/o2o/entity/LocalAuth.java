@@ -1,4 +1,4 @@
-package cn.wansboods.o2o.model;
+package cn.wansboods.o2o.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
