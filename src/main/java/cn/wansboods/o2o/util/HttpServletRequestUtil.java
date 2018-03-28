@@ -1,9 +1,10 @@
 package cn.wansboods.o2o.util;
 
 
+import javax.servlet.http.HttpServletRequest;
 
 public class HttpServletRequestUtil {
-    public static int getInt(HttpServletRequest request, String key ){
+    public static int getInt( HttpServletRequest request, String key ){
         try{
             return Integer.decode( request.getParameter( key ) );
         }catch ( Exception e ){
