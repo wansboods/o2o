@@ -29,11 +29,11 @@ public class ShopDaoTest extends BaseTest{
         shop.setOwner( owener );
         shop.setArea( area );
         shop.setShopCategory( shopCategory );
-        shop.setShopName("测试的店铺");
-        shop.setShopDesc("test");
-        shop.setShopAddr("test");
-        shop.setPhone("12345678901");
-        shop.setShopImg( "test");
+        shop.setShopName("测试的店铺117");
+        shop.setShopDesc("test1");
+        shop.setShopAddr("test2");
+        shop.setPhone("12345678902");
+        shop.setShopImg( "test1");
         shop.setCreatTime( new Date());
         shop.setEnableStatus( 1 );
         shop.setAdvice( "审核中");

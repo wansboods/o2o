@@ -8,16 +8,15 @@ public class PathUtil {
      * @return
      */
     public static String getImgBasePath(){
-        String os = System.getProperty( "os.name");
+        String os = System.getProperty( "os.name" );
         String basePath="";
         if( os.toLowerCase().startsWith( "win" ) ){
-            basePath = "E:/prokectdev/image/";
+            basePath = "E:/img/prokectdev/image/";
         }else{
             basePath = "/home/wasnboods/image/";
         }
 
-        basePath=basePath.replace( "/", seperator );
-
+        basePath = basePath.replace( "/", seperator );
         return basePath;
     }
 

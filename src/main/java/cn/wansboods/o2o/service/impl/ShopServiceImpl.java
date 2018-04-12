@@ -12,35 +12,41 @@ import cn.wansboods.o2o.util.PathUtil;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import java.io.File;
 import java.util.Date;
 
 public class ShopServiceImpl extends BaseService<ShopDao> implements ShopService  {
+
     @Transactional
-    public ShopExecution addShop(Shop shop, CommonsMultipartFile shopImg) {
+    public ShopExecution addShop(Shop shop, File shopImg){
+
+        //空值判断
         if( null == shop ){
             return new ShopExecution( ShopStateEmum.NULL_SHOPID );
         }
 
         try {
+            //店铺信息赋初始值
             shop.setEnableStatus( 0 );
             shop.setCreatTime( new Date() );
             shop.setLastEditTime( new Date() );
+            //添加店铺信息
             int effectedNum = baseEntityMapper.insertShop( shop );
             if( effectedNum <= 0 ){
-                throw new ShopOperationException( "创建商铺信息失败" );
+                throw new RuntimeException( "创建商铺信息失败" );
             }else {
                 if( shopImg != null ){
                     //存储图片
                     try {
                         addShopImg( shop, shopImg );
                     }catch (Exception e ){
-                        throw new ShopOperationException( "addShopImg err:" + e.getMessage() );
+                        throw new RuntimeException( "addShopImg err:" + e.getMessage() );
                     }
 
                     //更新店铺的图片的地址
                     effectedNum = baseEntityMapper.updateShop( shop );
                     if( effectedNum <= 0 ){
-                        throw new ShopOperationException( "updateShop err" );
+                        throw new RuntimeException( "更新图片地址失败" );
                     }
 //                    shop.getShopImg()
                 }
@@ -49,11 +55,12 @@ public class ShopServiceImpl extends BaseService<ShopDao> implements ShopService
             throw new ShopOperationException( "addShop err:" + e.getMessage() );
         }
 
-        return new ShopExecution( ShopStateEmum.CHECK );
+        return new ShopExecution( ShopStateEmum.CHECK, shop );
     }
 
-    private void addShopImg(Shop shop, CommonsMultipartFile shopImg) {
-        // 获取shop目录的相对路径
+
+    private void addShopImg(Shop shop, File shopImg) {
+        // 获取 shop目录的相对路径
         String dest = PathUtil.getShopImagePath( shop.getShopId() );
         String shopImgAddr = ImageUtil.generateThumbnail( shopImg, dest );
         shop.setShopImg( shopImgAddr );

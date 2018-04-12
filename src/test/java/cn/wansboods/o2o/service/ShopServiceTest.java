@@ -1,21 +1,20 @@
 package cn.wansboods.o2o.service;
 
 import cn.wansboods.o2o.BaseTest;
-import cn.wansboods.o2o.enums.ShopStateEmum;
 import cn.wansboods.o2o.entity.Area;
 import cn.wansboods.o2o.entity.PersonInfo;
 import cn.wansboods.o2o.entity.Shop;
 import cn.wansboods.o2o.entity.ShopCategory;
+import cn.wansboods.o2o.enums.ShopStateEmum;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
-@Service
-public class ShopServiceTest extends BaseTest {
+public class ShopServiceTest extends BaseTest{
+
     @Autowired
     private ShopService shopService;
 
@@ -31,16 +30,18 @@ public class ShopServiceTest extends BaseTest {
         shop.setOwner( owener );
         shop.setArea( area );
         shop.setShopCategory( shopCategory );
-        shop.setShopName("测试的店铺2");
+        shop.setShopName("测试的店铺118");
         shop.setShopDesc("test2");
         shop.setShopAddr("test2");
-        shop.setPhone("12345678901");
-
+        shop.setPhone("12345678902");
         shop.setCreatTime( new Date());
         shop.setEnableStatus( ShopStateEmum.CHECK.getState() );
         shop.setAdvice( "审核中");
-//        CommonsMultipartFile shopImg = new CommonsMultipartFile( "" );
-//        ShopExecution se = shopService.addShop( shop, shopImg );
-//        assertEquals( ShopStateEmum.CHECK.getState(), se.getState() );
+        //File shopImg = new File( "" );
+
+
     }
+
+
+
 }
