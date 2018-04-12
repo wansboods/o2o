@@ -1,6 +1,7 @@
 package cn.wansboods.o2o.service;
 
 import cn.wansboods.o2o.BaseTest;
+import cn.wansboods.o2o.dto.ShopExecution;
 import cn.wansboods.o2o.entity.Area;
 import cn.wansboods.o2o.entity.PersonInfo;
 import cn.wansboods.o2o.entity.Shop;
@@ -8,7 +9,9 @@ import cn.wansboods.o2o.entity.ShopCategory;
 import cn.wansboods.o2o.enums.ShopStateEmum;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
@@ -37,9 +40,10 @@ public class ShopServiceTest extends BaseTest{
         shop.setCreatTime( new Date());
         shop.setEnableStatus( ShopStateEmum.CHECK.getState() );
         shop.setAdvice( "审核中");
-        //File shopImg = new File( "" );
 
-
+        File shopImg = new File( "E:\\img\\testImg2.jpg");
+        ShopExecution se = shopService.addShop( shop, shopImg );
+        assertEquals( ShopStateEmum.CHECK.getState(), se.getState() );
     }
 
 
