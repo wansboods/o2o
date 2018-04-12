@@ -36,7 +36,7 @@ public class ImageUtil {
      * @param cFile
      * @return
      */
-    private static String getFileExtension( File cFile) {
+    public static String getFileExtension( File cFile) {
         String originalFileName = cFile.getName();
         return originalFileName.substring( originalFileName.lastIndexOf("."));
     }
@@ -84,10 +84,10 @@ public class ImageUtil {
 
 
     public static void main(String[] args) {
-        Logger ptr = LoggerFactory.getLogger( ImageUtil.class );
+        Logger logger = LoggerFactory.getLogger( ImageUtil.class );
         //classpath 绝对路径
 //        String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-        ptr.info( "图片的地址名称{}", basePath );
+        logger.info( "图片的地址名称{}", basePath );
         try {
             Thumbnails.of( new File("E:\\img\\testImg.jpg") )
                     .size(800, 600 )

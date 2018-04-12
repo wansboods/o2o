@@ -36,4 +36,12 @@ public class HttpServletRequestUtil {
         }
     }
 
+    public static String getString( HttpServletRequest request, String key ){
+        try{
+            return request.getParameter( key );
+        }catch ( Exception e ){
+            return null;
+        }
+    }
+
 }

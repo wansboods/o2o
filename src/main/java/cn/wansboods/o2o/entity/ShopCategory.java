@@ -11,6 +11,7 @@ public class ShopCategory implements Serializable {
     private Integer priority;
     private Date createtime;
     private Date lastEditTime;
+    private ShopCategory parent;
 
     public Long getShopCategoryId() {
         return shopCategoryId;
@@ -66,5 +67,13 @@ public class ShopCategory implements Serializable {
 
     public void setLastEditTime(Date lastEditTime) {
         this.lastEditTime = lastEditTime;
+    }
+
+    public ShopCategory getParent() {
+        return parent;
+    }
+
+    public void setParent(ShopCategory parent) {
+        this.parent = parent;
     }
 }
