@@ -10,6 +10,7 @@ import cn.wansboods.o2o.enums.ShopStateEmum;
 import cn.wansboods.o2o.service.AreaService;
 import cn.wansboods.o2o.service.ShopCategoryService;
 import cn.wansboods.o2o.service.ShopService;
+import cn.wansboods.o2o.util.CodeUtil;
 import cn.wansboods.o2o.util.HttpServletRequestUtil;
 import cn.wansboods.o2o.util.ImageUtil;
 import cn.wansboods.o2o.util.PathUtil;
@@ -46,7 +47,7 @@ public class ShopManagementController extends BaseController<ShopService> {
         try{
             os = new FileOutputStream( file );
             int bytesRead = 0;
-            byte[] buffer = new byte[ 1024 ];
+            byte[] buffer = new byte[ 10240 ];
             while ( -1 != ( bytesRead = ins.read( buffer ) ) ){
                 os.write( buffer, 0, bytesRead );
             }
@@ -67,11 +68,17 @@ public class ShopManagementController extends BaseController<ShopService> {
         }
     }
 
-    @RequestMapping(value = "registershop",method= RequestMethod.POST)
+    @RequestMapping(value = "/registershop",method= RequestMethod.POST)
     @ResponseBody
     private Map<String,Object> registerShop(HttpServletRequest request ){
 
         Map<String,Object> modelMap = new HashMap<String,Object>();
+        // 0 验证验证码
+        if( !CodeUtil.checkVerifyCode(request)){
+            modelMap.put( "success", false );
+            modelMap.put( "errMsg", "输入的验证码有误" );
+            return modelMap;
+        }
 
         // 1 接收并转化相应的参数, 包括店铺信息以及图片信息
         String shopStr = HttpServletRequestUtil.getString( request, "shopStr");
@@ -103,6 +110,13 @@ public class ShopManagementController extends BaseController<ShopService> {
             owmer.setUseId( 1L );
             shop.setOwner( owmer );
             File shopImgFile = new File( PathUtil.getImgBasePath() + ImageUtil.getRandomFileName() );
+            try {
+                shopImgFile.createNewFile();
+            } catch (IOException e) {
+                modelMap.put( "success", false );
+                modelMap.put( "errMsg", e.getMessage() );
+                return modelMap;
+            }
 
             try{
                 inputStreamToFile( shopImg.getInputStream( ), shopImgFile );
@@ -112,24 +126,18 @@ public class ShopManagementController extends BaseController<ShopService> {
                 return modelMap;
             }
 
-            try {
-                shopImgFile.createNewFile();
-            } catch (IOException e) {
-                modelMap.put( "success", false );
-                modelMap.put( "errMsg", e.getMessage() );
-                return modelMap;
-            }
+
 
             ShopExecution se = baseService.addShop( shop, shopImgFile );
             if( se.getState() == ShopStateEmum.CHECK.getState() ){
                 modelMap.put( "success", true );
                 modelMap.put( "errMsg", se.getStateInfo() );
-                return modelMap;
             }else{
                 modelMap.put( "success", false );
                 modelMap.put( "errMsg", se.getStateInfo() );
-                return modelMap;
             }
+
+            return modelMap;
         }else{
             modelMap.put( "success", false );
             modelMap.put( "errMsg", "请输入店铺信息" );

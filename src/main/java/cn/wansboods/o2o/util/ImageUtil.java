@@ -37,8 +37,15 @@ public class ImageUtil {
      * @return
      */
     public static String getFileExtension( File cFile) {
-        String originalFileName = cFile.getName();
-        return originalFileName.substring( originalFileName.lastIndexOf("."));
+        String fileName = cFile.getName();
+        String suffix = null;
+        try {
+            suffix  = fileName.substring( fileName.lastIndexOf(".") );
+        }catch ( Exception e ){
+            return ".jpg";
+        }
+
+        return suffix;
     }
 
     /**
@@ -63,9 +70,14 @@ public class ImageUtil {
 
         String realFileName = getRandomFileName(); //随机名
         String extension = getFileExtension( thumbnail ); //扩展名
+        System.out.print( targetAddr );
+        System.out.print( PathUtil.getImgBasePath() );
         makeDirPath( targetAddr );
 
         String relatibeAddr = targetAddr + realFileName + extension;
+        System.out.print( relatibeAddr );
+        System.out.print( PathUtil.getImgBasePath() );
+
         File dest = new File( PathUtil.getImgBasePath() + relatibeAddr );
         try {
             Thumbnails.of(thumbnail)

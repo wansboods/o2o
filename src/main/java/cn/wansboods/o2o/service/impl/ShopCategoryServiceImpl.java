@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ShopCategoryServiceImp extends BaseService<ShopCategoryDao> implements ShopCategoryService {
+public class ShopCategoryServiceImpl extends BaseService<ShopCategoryDao> implements ShopCategoryService {
     public List<ShopCategory> getShopCategoryList( ShopCategory shopCategoryCondition ){
         return baseEntityMapper.queryShopCategory( shopCategoryCondition );
     }
