@@ -94,7 +94,7 @@ public class ShopManagementController extends BaseController<ShopService> {
 
         CommonsMultipartFile shopImg = null;
         //上传文件类
-        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+        CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver( request.getSession().getServletContext() );
         if( commonsMultipartResolver.isMultipart( request ) ){
             MultipartHttpServletRequest multipartHttpServletRequest = ( MultipartHttpServletRequest )request;
             shopImg = ( CommonsMultipartFile ) multipartHttpServletRequest.getFile( "shopImg" );
