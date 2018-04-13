@@ -42,31 +42,31 @@ public class ShopManagementController extends BaseController<ShopService> {
     private AreaService areaService;
 
 
-    private static void inputStreamToFile(InputStream ins, File file ){
-        FileOutputStream os = null;
-        try{
-            os = new FileOutputStream( file );
-            int bytesRead = 0;
-            byte[] buffer = new byte[ 10240 ];
-            while ( -1 != ( bytesRead = ins.read( buffer ) ) ){
-                os.write( buffer, 0, bytesRead );
-            }
-        }catch ( Exception e ){
-            throw new RuntimeException( "调用inputStreamToFile产生异常:" + e.getMessage() );
-        }finally {
-            try{
-                if( os != null ){
-                    os.close();
-                }
-
-                if( ins != null ){
-                    ins.close();
-                }
-            }catch (IOException e ){
-                throw new RuntimeException( "inputStreamToFile关闭io产生异常:" + e.getMessage() );
-            }
-        }
-    }
+//    private static void inputStreamToFile(InputStream ins, File file ){
+//        FileOutputStream os = null;
+//        try{
+//            os = new FileOutputStream( file );
+//            int bytesRead = 0;
+//            byte[] buffer = new byte[ 10240 ];
+//            while ( -1 != ( bytesRead = ins.read( buffer ) ) ){
+//                os.write( buffer, 0, bytesRead );
+//            }
+//        }catch ( Exception e ){
+//            throw new RuntimeException( "调用inputStreamToFile产生异常:" + e.getMessage() );
+//        }finally {
+//            try{
+//                if( os != null ){
+//                    os.close();
+//                }
+//
+//                if( ins != null ){
+//                    ins.close();
+//                }
+//            }catch (IOException e ){
+//                throw new RuntimeException( "inputStreamToFile关闭io产生异常:" + e.getMessage() );
+//            }
+//        }
+//    }
 
     @RequestMapping(value = "/registershop",method= RequestMethod.POST)
     @ResponseBody
@@ -109,34 +109,37 @@ public class ShopManagementController extends BaseController<ShopService> {
             PersonInfo owmer = new PersonInfo();
             owmer.setUseId( 1L );
             shop.setOwner( owmer );
-            File shopImgFile = new File( PathUtil.getImgBasePath() + ImageUtil.getRandomFileName() );
+//            File shopImgFile = new File( PathUtil.getImgBasePath() + ImageUtil.getRandomFileName() );
+//            try {
+//                shopImgFile.createNewFile();
+//            } catch (IOException e) {
+//                modelMap.put( "success", false );
+//                modelMap.put( "errMsg", e.getMessage() );
+//                return modelMap;
+//            }
+
+//            try{
+//                inputStreamToFile( shopImg.getInputStream( ), shopImgFile );
+//            }catch( IOException e ){
+//                modelMap.put( "success", false );
+//                modelMap.put( "errMsg", e.getMessage() );
+//                return modelMap;
+//            }
+
+            ShopExecution se = null;
             try {
-                shopImgFile.createNewFile();
+                se = baseService.addShop( shop, shopImg.getInputStream(), shopImg.getOriginalFilename() );
+                if( se.getState() == ShopStateEmum.CHECK.getState() ){
+                    modelMap.put( "success", true );
+                    modelMap.put( "errMsg", se.getStateInfo() );
+                }else{
+                    modelMap.put( "success", false );
+                    modelMap.put( "errMsg", se.getStateInfo() );
+                }
             } catch (IOException e) {
                 modelMap.put( "success", false );
                 modelMap.put( "errMsg", e.getMessage() );
-                return modelMap;
             }
-
-            try{
-                inputStreamToFile( shopImg.getInputStream( ), shopImgFile );
-            }catch( IOException e ){
-                modelMap.put( "success", false );
-                modelMap.put( "errMsg", e.getMessage() );
-                return modelMap;
-            }
-
-
-
-            ShopExecution se = baseService.addShop( shop, shopImgFile );
-            if( se.getState() == ShopStateEmum.CHECK.getState() ){
-                modelMap.put( "success", true );
-                modelMap.put( "errMsg", se.getStateInfo() );
-            }else{
-                modelMap.put( "success", false );
-                modelMap.put( "errMsg", se.getStateInfo() );
-            }
-
             return modelMap;
         }else{
             modelMap.put( "success", false );

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -33,11 +34,10 @@ public class ImageUtil {
 
     /**
      *  获取输入的文件流的扩展名
-     * @param cFile
+     * @param fileName
      * @return
      */
-    public static String getFileExtension( File cFile) {
-        String fileName = cFile.getName();
+    public static String getFileExtension( String fileName ) {
         String suffix = null;
         try {
             suffix  = fileName.substring( fileName.lastIndexOf(".") );
@@ -62,14 +62,14 @@ public class ImageUtil {
 
     /**
      * 保存图片地址
-     * @param thumbnail
+     * @param thumbnailInputStream
      * @param targetAddr
      * @return
      */
-    public static String generateThumbnail( File thumbnail, String targetAddr ){
+    public static String generateThumbnail(InputStream thumbnailInputStream, String fileName, String targetAddr ){
 
         String realFileName = getRandomFileName(); //随机名
-        String extension = getFileExtension( thumbnail ); //扩展名
+        String extension = getFileExtension( fileName ); //扩展名
         System.out.print( targetAddr );
         System.out.print( PathUtil.getImgBasePath() );
         makeDirPath( targetAddr );
@@ -80,7 +80,7 @@ public class ImageUtil {
 
         File dest = new File( PathUtil.getImgBasePath() + relatibeAddr );
         try {
-            Thumbnails.of(thumbnail)
+            Thumbnails.of(thumbnailInputStream)
                     .size( 200,200 )
                     .watermark( Positions.BOTTOM_RIGHT,
                             ImageIO.read(new File( basePath + "\\jpg\\jiaziyingxiang.png")), 0.5f)

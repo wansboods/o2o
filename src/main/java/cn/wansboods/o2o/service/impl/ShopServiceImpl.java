@@ -13,9 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Date;
 
 @Service
@@ -24,7 +24,7 @@ public class ShopServiceImpl extends BaseService<ShopDao> implements ShopService
     Logger logger = LoggerFactory.getLogger( ShopServiceImpl.class );
 
     @Transactional
-    public ShopExecution addShop(Shop shop, File shopImg){
+    public ShopExecution addShop(Shop shop, InputStream shopImgInputStream, String fileName ) throws ShopOperationException{
 
         //空值判断
         if( null == shop ){
@@ -42,10 +42,10 @@ public class ShopServiceImpl extends BaseService<ShopDao> implements ShopService
             if( effectedNum <= 0 ){
                 throw new ShopOperationException( "创建商铺信息失败" );
             }else {
-                if( shopImg != null ){
+                if( shopImgInputStream != null ){
                     //存储图片
                     try {
-                        addShopImg( shop, shopImg );
+                        addShopImg( shop, shopImgInputStream, fileName );
                     }catch (Exception e ){
                         throw new ShopOperationException( "addShopImg err:" + e.getMessage() );
                     }
@@ -66,10 +66,10 @@ public class ShopServiceImpl extends BaseService<ShopDao> implements ShopService
     }
 
 
-    private void addShopImg(Shop shop, File shopImg) {
+    private void addShopImg(Shop shop, InputStream shopImgInputStram, String fileName ) {
         // 获取 shop目录的相对路径
         String dest = PathUtil.getShopImagePath( shop.getShopId() );
-        String shopImgAddr = ImageUtil.generateThumbnail( shopImg, dest );
+        String shopImgAddr = ImageUtil.generateThumbnail( shopImgInputStram, fileName, dest );
         shop.setShopImg( shopImgAddr );
     }
 }

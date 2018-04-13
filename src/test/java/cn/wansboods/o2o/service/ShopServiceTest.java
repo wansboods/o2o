@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
@@ -42,7 +45,13 @@ public class ShopServiceTest extends BaseTest{
         shop.setAdvice( "审核中");
 
         File shopImg = new File( "E:\\img\\testImg2.jpg");
-        ShopExecution se = shopService.addShop( shop, shopImg );
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream( shopImg );
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        ShopExecution se = shopService.addShop( shop, inputStream, shop.getShopName() );
         assertEquals( ShopStateEmum.CHECK.getState(), se.getState() );
     }
 
