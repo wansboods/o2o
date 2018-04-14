@@ -3,3 +3,6 @@
 2018-04-12 10:14:33.235 [main] INFO  cn.wansboods.o2o.util.ImageUtil - 图片的地址名称/D:/IJ/o2o/target/classes/
 2018-04-12 22:46:55.122 [main] INFO  cn.wansboods.o2o.util.ImageUtil - 图片的地址名称/E:/IdeaProjects/o2o/target/classes/
 2018-04-12 22:47:47.371 [main] INFO  cn.wansboods.o2o.util.ImageUtil - 图片的地址名称/E:/IdeaProjects/o2o/target/classes/
+2018-04-14 15:14:34.957 [main] INFO  cn.wansboods.o2o.dao.split.DynamicDataSourceHolder - 所使用的数据源:slave
+2018-04-14 15:45:34.472 [main] INFO  cn.wansboods.o2o.dao.split.DynamicDataSourceHolder - 所使用的数据源:slave
+2018-04-14 15:48:50.974 [main] INFO  cn.wansboods.o2o.dao.split.DynamicDataSourceHolder - 所使用的数据源:slave

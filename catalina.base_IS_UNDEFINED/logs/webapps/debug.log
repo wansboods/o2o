@@ -1,1 +1,4 @@
 2018-04-13 22:24:54.456 [main] DEBUG cn.wansboods.o2o.service.impl.ShopServiceImpl - =============> 插入的Shop id=1
+2018-04-14 15:14:34.957 [main] DEBUG c.w.o2o.dao.split.DynamicDataSourceInterceptor - 设置的方法[cn.wansboods.o2o.dao.AreaDao.queryArea], use[slave] Strategy, SqlCommanType[SELECT]
+2018-04-14 15:45:34.469 [main] DEBUG c.w.o2o.dao.split.DynamicDataSourceInterceptor - 设置的方法[cn.wansboods.o2o.dao.AreaDao.queryArea], use[slave] Strategy, SqlCommanType[SELECT]
+2018-04-14 15:48:50.969 [main] DEBUG c.w.o2o.dao.split.DynamicDataSourceInterceptor - 设置的方法[cn.wansboods.o2o.dao.AreaDao.queryArea], use[slave] Strategy, SqlCommanType[SELECT]
