@@ -4,6 +4,50 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.wansboods.o2o.dao.ShopDao">
+    <resultMap id="shopMap" type="cn.wansboods.o2o.entity.Shop">
+        <result column="shop_id" property="shopId"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="shop_desc" property="shopDesc"/>
+        <result column="shop_addr" property="shopAddr"/>
+        <result column="shop_img" property="shopImg"/>
+        <result column="advice" property="advice"/>
+        <result column="phone" property="phone"/>
+        <result column="priority" property="priority"/>
+        <result column="enable_status" property="enableStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="last_edit_time" property="lastEditTime"/>
+        <association property="area" column="area_id" javaType="cn.wansboods.o2o.entity.Area">
+            <id column="area_id" property="areaId"/>
+            <result column="area_name" property="areaName"/>
+        </association>
+        
+        <association property="shopCategory" column="shop_category_id" javaType="cn.wansboods.o2o.entity.ShopCategory">
+            <id column="shop_category_id" property="shopCategoryId"/>
+            <result column="shop_category_name" property="shopCategoryName"/>
+        </association>
+
+        <association property="owner" column="user_id" javaType="cn.wansboods.o2o.entity.PersonInfo">
+            <id column="user_id" property="userId"/>
+            <result column="name" property="name"/>
+        </association>
+    </resultMap>
+
+    <select id="queryByShopId" resultMap="shopMap" parameterType="Long">
+      SELECT
+        s.shop_id,
+        s.shop_name,
+      FROM
+        t_shop s,
+        t_area a,
+        t_shop_category sc,
+      WHERE
+        s.area_id = a.area_id
+      AND
+        s.shop_category_id = sc.shop_category_id
+      AND
+        s.shop_id = #{shopId}
+    </select>
+
     <insert id="insertShop" useGeneratedKeys="true" keyProperty="shopId"
             keyColumn="shop_id" >
         <!-- 具体的sql -->
