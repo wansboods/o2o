@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class PersonInfo implements Serializable {
-    private Long useId;
+    private Long userId;
     private String name;
     private String profileImg;
     private String email;
@@ -15,12 +15,13 @@ public class PersonInfo implements Serializable {
     private Date createtime;
     private Date lastEditTime;
 
-    public Long getUseId() {
-        return useId;
+
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUseId(Long useId) {
-        this.useId = useId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getName() {

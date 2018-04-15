@@ -66,10 +66,46 @@ public class ShopServiceImpl extends BaseService<ShopDao> implements ShopService
     }
 
 
+
     private void addShopImg(Shop shop, InputStream shopImgInputStram, String fileName ) {
         // 获取 shop目录的相对路径
         String dest = PathUtil.getShopImagePath( shop.getShopId() );
         String shopImgAddr = ImageUtil.generateThumbnail( shopImgInputStram, fileName, dest );
         shop.setShopImg( shopImgAddr );
     }
+
+    public Shop getByShopId(long shopId) {
+        return baseEntityMapper.queryByShopId( shopId );
+    }
+
+    public ShopExecution modifyShop(Shop shop, InputStream shopInputStream, String fileName)
+            throws ShopOperationException {
+        if( shop == null || shop.getShopId() == null ){
+            return new ShopExecution( ShopStateEmum.CHECK.NULL_SHOP );
+        }
+
+        try{
+            //1.判断是否需要处理图片
+            if( shopInputStream != null && fileName != null && !"".equals( fileName ) ){
+                Shop tempShop = baseEntityMapper.queryByShopId( shop.getShopId() );
+                if( tempShop.getShopImg() != null ){
+                    ImageUtil.deleteFileOrPath( tempShop.getShopImg() );
+                }
+
+                addShopImg( shop, shopInputStream, fileName );
+            }
+            //2.更新店铺信息
+            shop.setLastEditTime( new Date() );
+            int effectedNum = baseEntityMapper.updateShop( shop );
+            if( effectedNum <= 0 ){
+                return new ShopExecution( ShopStateEmum.CHECK.INNER_ERROR );
+            }else{
+                shop = baseEntityMapper.queryByShopId( shop.getShopId() );
+                return new ShopExecution( ShopStateEmum.CHECK.SUCCESS,shop );
+            }
+        }catch( Exception e ){
+            throw  new ShopOperationException( "modifyShop error:" + e.getMessage() );
+        }
+    }
+
 }
