@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,6 +28,17 @@ public class ShopServiceTest extends BaseTest{
     Logger logger =  LoggerFactory.getLogger( ShopServiceTest.class );
     @Autowired
     private ShopService shopService;
+
+    @Test
+    public void testQueryShopListandCount(){
+        Shop shopCondition = new Shop();
+        ShopCategory sc = new ShopCategory();
+
+        sc.setShopCategoryId( 3L );
+        shopCondition.setShopCategory( sc );
+        ShopExecution se = shopService.getShopList( shopCondition, 1, 2 );
+        logger.debug( "店铺列表数为:{} | 店铺总数:{}", se.getShopList().size(), se.getCount() );
+    }
 
     @Test
     public void testAddShop(){

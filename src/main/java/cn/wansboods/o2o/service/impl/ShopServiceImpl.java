@@ -8,6 +8,7 @@ import cn.wansboods.o2o.exceptions.ShopOperationException;
 import cn.wansboods.o2o.entity.Shop;
 import cn.wansboods.o2o.service.ShopService;
 import cn.wansboods.o2o.util.ImageUtil;
+import cn.wansboods.o2o.util.PageCalculator;
 import cn.wansboods.o2o.util.PathUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +18,25 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.File;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ShopServiceImpl extends BaseService<ShopDao> implements ShopService  {
 
     Logger logger = LoggerFactory.getLogger( ShopServiceImpl.class );
+
+    public ShopExecution getShopList( Shop shopCondition, int pageIndex, int pageSize) {
+        List<Shop> shopList = baseEntityMapper.queryShopList( shopCondition, PageCalculator.calculateRowIndex( pageIndex,pageSize ), pageSize );
+        int count = baseEntityMapper.queryShopCount( shopCondition );
+        ShopExecution se = new ShopExecution();
+        if( null != shopList ){
+            se.setShopList( shopList );
+            se.setCount( count );
+        }else{
+            se.setState( ShopStateEmum.INNER_ERROR.getState() );
+        }
+        return se;
+    }
 
     @Transactional
     public ShopExecution addShop(Shop shop, InputStream shopImgInputStream, String fileName ) throws ShopOperationException{
