@@ -29,10 +29,14 @@ public class ShopServiceImpl extends BaseService<ShopDao> implements ShopService
         List<Shop> shopList = baseEntityMapper.queryShopList( shopCondition, PageCalculator.calculateRowIndex( pageIndex,pageSize ), pageSize );
         int count = baseEntityMapper.queryShopCount( shopCondition );
         ShopExecution se = new ShopExecution();
+        logger.debug( "获取到店铺信息{}|总数{}", shopList.size(), count );
         if( null != shopList ){
+            logger.debug( "------------1");
             se.setShopList( shopList );
             se.setCount( count );
+            se.setState( ShopStateEmum.SUCCESS.getState() );
         }else{
+            logger.debug( "------------2");
             se.setState( ShopStateEmum.INNER_ERROR.getState() );
         }
         return se;

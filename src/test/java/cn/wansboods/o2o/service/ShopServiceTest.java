@@ -34,7 +34,7 @@ public class ShopServiceTest extends BaseTest{
         Shop shopCondition = new Shop();
         ShopCategory sc = new ShopCategory();
 
-        sc.setShopCategoryId( 3L );
+        sc.setShopCategoryId( 1L );
         shopCondition.setShopCategory( sc );
         ShopExecution se = shopService.getShopList( shopCondition, 1, 2 );
         logger.debug( "店铺列表数为:{} | 店铺总数:{}", se.getShopList().size(), se.getCount() );
