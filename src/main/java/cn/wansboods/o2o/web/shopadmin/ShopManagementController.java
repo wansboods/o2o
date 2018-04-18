@@ -79,6 +79,7 @@ public class ShopManagementController extends BaseController<ShopService> {
         request.getSession().setAttribute("user", user );
         user = ( PersonInfo )request.getSession().getAttribute("user" );
 
+        logger.debug( "use name={}", user.getName() );
 //        user.setName( "test");
         try {
             Shop shopCondition = new Shop();
