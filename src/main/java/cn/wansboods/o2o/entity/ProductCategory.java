@@ -8,7 +8,8 @@ public class ProductCategory {
     private Long shopId;
     private String productCategoryName;
     private Integer priority;
-    private Date createtime;
+    private Date createTime;
+
 
     public Long getProductCategoryId() {
         return productCategoryId;
@@ -42,11 +43,11 @@ public class ProductCategory {
         this.priority = priority;
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
